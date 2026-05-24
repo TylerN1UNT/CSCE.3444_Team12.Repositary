@@ -1,0 +1,5 @@
+Frontend ideas:
+- Upload image page
+- Style selection page
+- Results display page
+- Modern UI design

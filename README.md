@@ -1,4 +1,4 @@
-# AI Interior design app
+# Reimagine - AI Interior design app
 
 # Description
 

@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 
 const DesignPreferencesPage: React.FC = () => {
   return (
@@ -27,25 +27,30 @@ const DesignPreferencesPage: React.FC = () => {
       <IonContent fullscreen>
 
         {/* Content */}
-        <div style={{display: 'flex' , flexDirection : 'column', alignItems: 'center', width: '100vw', height: '100vh'}}>
-
-            <img style={{width : '95%', height: '40%', backgroundColor: 'yellow', marginTop: '10px'}}/>
-
-
-            <div style={{display : 'flex', flexDirection : 'column', width : '30%'}}>
-              
-              <h1 style={{fontWeight : 'bold'}}> Redesign your space with AI</h1>
-              <p>Upload a photo of your room and let AI create stunning designs for you.</p>
-              
-              <IonButton color="dark" routerLink='/upload'>
-                Upload Room Photo
-              </IonButton>
-
-              <IonButton color="light" routerLink='/upload'> Start Designing </IonButton>
-            </div>
+        <div style={{display : 'inline'}}>
+              <b> Describe your dream room </b>
+              <span>(optional)</span>
         </div>
 
+        <IonInput placeholder='E.g. a cozy modern living room with earth tones, wooden furniture, and plants...'/>
 
+        <b> Choose style </b>
+        <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'space-evenly'}}>
+            <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+            <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+            <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+            <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+            <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+        </div>
+
+        <span> Color mood (optional) </span>
+        <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'start'}}>
+          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'white', marginRight: '20px'}}/>
+          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'lightgrey', marginRight: '20px'}}/>
+          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'darkgrey', marginRight: '20px'}}/>
+          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'gray', marginRight: '20px'}}/>
+          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'black', marginRight: '20px'}}/>
+        </div>
         
       </IonContent>
     </IonPage>

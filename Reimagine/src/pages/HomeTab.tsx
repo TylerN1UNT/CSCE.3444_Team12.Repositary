@@ -37,11 +37,11 @@ const HomeTab: React.FC = () => {
               <h1 style={{fontWeight : 'bold'}}> Redesign your space with AI</h1>
               <p>Upload a photo of your room and let AI create stunning designs for you.</p>
               
-              <IonButton color="dark">
+              <IonButton color="dark" routerLink='/upload'>
                 Upload Room Photo
               </IonButton>
 
-              <IonButton color="light"> Start Designing </IonButton>
+              <IonButton color="light" routerLink='/upload'> Start Designing </IonButton>
             </div>
         </div>
 

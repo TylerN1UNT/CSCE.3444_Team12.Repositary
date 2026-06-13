@@ -46,12 +46,22 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import UploadPhotoPage from './pages/UploadPhotoPage';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+
+      {/* Setup regular pages */}
+      <IonRouterOutlet>
+        <Route exact path="/upload">
+          <UploadPhotoPage/>
+        </Route>
+      </IonRouterOutlet>
+
+      {/* Setup tab routing */}
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/home">
@@ -70,19 +80,25 @@ const App: React.FC = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
+
+        {/* Setup the Bottom navigation tabs */}
         <IonTabBar slot="bottom">
+
           <IonTabButton tab="home" href="/home">
             <IonIcon aria-hidden="true" icon={triangle} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
+
           <IonTabButton tab="favorites" href="/favorites">
             <IonIcon aria-hidden="true" icon={ellipse} />
             <IonLabel>Favorites</IonLabel>
           </IonTabButton>
+
           <IonTabButton tab="history" href="/history">
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>History</IonLabel>
           </IonTabButton>
+
           <IonTabButton tab="profile" href="/profile">
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>Profile</IonLabel>

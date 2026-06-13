@@ -1,5 +1,6 @@
 import { IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import "./UploadPhotoPage.css"
+import "./ClickPassthrough.css"
 import { useState } from 'react';
 
 const UploadPhotoPage: React.FC = () => {

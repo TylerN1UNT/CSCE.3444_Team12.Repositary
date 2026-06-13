@@ -55,17 +55,7 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
 
-      {/* Setup regular pages */}
-      <IonRouterOutlet>
-        <Route exact path="/upload">
-          <UploadPhotoPage/>
-        </Route>
-        <Route exact path="/design-preferences">
-          <DesignPreferencesPage/>
-        </Route>
-      </IonRouterOutlet>
-
-      {/* Setup tab routing */}
+      {/* Setup Pages routing */}
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/home">
@@ -84,6 +74,12 @@ const App: React.FC = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
+        <Route exact path="/upload">
+          <UploadPhotoPage/>
+        </Route>
+        <Route exact path="/design-preferences">
+          <DesignPreferencesPage/>
+        </Route>
 
         {/* Setup the Bottom navigation tabs */}
         <IonTabBar slot="bottom">

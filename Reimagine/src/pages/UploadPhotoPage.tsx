@@ -1,33 +1,22 @@
 import { IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import "./UploadPhotoPage.css"
+import { useState } from 'react';
 
 const UploadPhotoPage: React.FC = () => {
+  const [roomType, setRoomType] = useState('');
+  const [designStyle, setDesignStyle] = useState('');
+
   return (
     <>
-
-    {/* Menu Contents */}
-        <IonMenu contentId="home-content">
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Menu Content</IonTitle>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent className="ion-padding">This is the menu content.</IonContent>
-        </IonMenu>
     
         {/* Page Contents */}
-        <IonPage id="home-content">
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle size="large"> Home </IonTitle>
-              <IonButtons slot="start">
-                <IonMenuButton></IonMenuButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
+        <IonPage>
+
           <IonContent fullscreen>
     
             {/* Content */}
+            <IonButton color="primary"> Choose Photo </IonButton>
+
             <div id="content-div">
     
                 <div id="image-upload-div">
@@ -44,7 +33,12 @@ const UploadPhotoPage: React.FC = () => {
                     <span>Room Type</span>
                     <IonList>
                       <IonItem>
-                        <IonSelect placeholder="Favorite Fruit" interface="popover">
+                        <IonSelect 
+                          placeholder="Favorite Fruit" 
+                          interface="action-sheet"
+                          value={roomType}
+                          onIonChange={e => setRoomType(e.detail.value)}
+                        >
                           <IonSelectOption value="apple">Apple</IonSelectOption>
                           <IonSelectOption value="banana">Banana</IonSelectOption>
                           <IonSelectOption value="orange">Orange</IonSelectOption>
@@ -57,7 +51,7 @@ const UploadPhotoPage: React.FC = () => {
                     <span>Design Style (Optional)</span>
                     <IonList>
                       <IonItem>
-                        <IonSelect placeholder="Favorite Fruit" interface="popover">
+                        <IonSelect placeholder="Favorite Fruit" interface="action-sheet">
                           <IonSelectOption value="apple">Apple</IonSelectOption>
                           <IonSelectOption value="banana">Banana</IonSelectOption>
                           <IonSelectOption value="orange">Orange</IonSelectOption>
@@ -66,14 +60,10 @@ const UploadPhotoPage: React.FC = () => {
                     </IonList>
                   </div>
       
-                  <IonButton color="dark">
-                    Next
-                  </IonButton>
+                  <span>You can customize more later</span>
+
+                  <IonButton color="dark" routerLink='/design-preferences'>Next</IonButton>
                 </div>
-
-                <span>You can customize more later</span>
-                <IonButton> Next </IonButton>
-
             </div>
 
         

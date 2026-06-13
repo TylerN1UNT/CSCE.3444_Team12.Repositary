@@ -1,5 +1,6 @@
 #content-div
 {
+    pointer-events: none;
     display: flex;
     flex-direction : column; 
     align-items: center; 
@@ -9,6 +10,7 @@
 
 #image-upload-div
 {
+    pointer-events: none;
     display : flex;
     flex-direction : column; 
     width : 95%;
@@ -25,11 +27,12 @@
 
 #controls-div
 {
+    pointer-events: none;
     display : flex;
     flex-direction : column; 
     width : 95%;
     height:100%;
-    justify-content: space-evenly;
+    justify-content: start;
 
     align-items : center;
     margin-top : 5px;
@@ -37,9 +40,11 @@
 
 .input-div
 {
+    pointer-events: none;
     display:flex;
     flex-direction: column;
     width:100%;
     height:fit-content;
 }
+
 

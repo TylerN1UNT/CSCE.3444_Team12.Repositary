@@ -47,6 +47,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 import UploadPhotoPage from './pages/UploadPhotoPage';
+import DesignPreferencesPage from './pages/DesignPreferencesPage';
 
 setupIonicReact();
 
@@ -58,6 +59,9 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         <Route exact path="/upload">
           <UploadPhotoPage/>
+        </Route>
+        <Route exact path="/design-preferences">
+          <DesignPreferencesPage/>
         </Route>
       </IonRouterOutlet>
 

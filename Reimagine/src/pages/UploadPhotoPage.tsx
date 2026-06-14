@@ -52,7 +52,12 @@ const UploadPhotoPage: React.FC = () => {
                     <span>Design Style (Optional)</span>
                     <IonList>
                       <IonItem>
-                        <IonSelect placeholder="Favorite Fruit" interface="action-sheet">
+                        <IonSelect 
+                          placeholder="Favorite Fruit" 
+                          interface="action-sheet"
+                          value={designStyle}
+                          onIonChange={e => setDesignStyle(e.detail.value)}
+                        >
                           <IonSelectOption value="apple">Apple</IonSelectOption>
                           <IonSelectOption value="banana">Banana</IonSelectOption>
                           <IonSelectOption value="orange">Orange</IonSelectOption>

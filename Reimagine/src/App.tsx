@@ -48,6 +48,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
+import GenerateDesignPage from './pages/GenerateDesignPage';
 
 setupIonicReact();
 
@@ -79,6 +80,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/design-preferences">
           <DesignPreferencesPage/>
+        </Route>
+        <Route exact path="/generating-design">
+            <GenerateDesignPage/>
         </Route>
 
         {/* Setup the Bottom navigation tabs */}

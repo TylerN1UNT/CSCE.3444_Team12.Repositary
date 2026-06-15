@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import "./UploadPhotoPage.css"
 import "./ClickPassthrough.css"
 import { useState } from 'react';
@@ -13,10 +13,18 @@ const UploadPhotoPage: React.FC = () => {
         {/* Page Contents */}
         <IonPage>
 
+          <IonHeader>
+            <IonToolbar>
+                <IonButtons slot="start">
+                  <IonBackButton text="" defaultHref='/home'></IonBackButton>
+                </IonButtons>
+                <IonTitle> Upload Photo </IonTitle>
+              </IonToolbar>
+            </IonHeader>
+
           <IonContent fullscreen>
     
             {/* Content */}
-            <IonButton color="primary"> Choose Photo </IonButton>
 
             <div id="content-div">
     

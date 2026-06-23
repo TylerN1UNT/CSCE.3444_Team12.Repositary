@@ -1,3 +1,14 @@
+
 node_modules
-ReimagineBackend/.venv
-ReimagineBackend/.env
+database.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env

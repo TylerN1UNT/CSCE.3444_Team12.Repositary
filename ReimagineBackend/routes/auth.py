@@ -30,8 +30,16 @@ def signup(request : Request, credentials : AuthenticationCredentials): # Sendin
     return jwt.encode({"username" : credentials.username}, request.app.state.JWT_SECRET_KEY, algorithm="HS256")
 
 
-def verifyHash(hash:str, plaintext:str):
+# Verifies if plaintext patches a hash
+def verifyHash(password_hasher, hash:str, plaintext:str) -> bool:
     try:
+
+        password_hasher.verify(hash, plaintext) # Throws an error if hash does not match plaintext
+        return True
+    
+    except:
+
+        return False
 
 
 @router.post("/login")
@@ -43,7 +51,7 @@ def login(request : Request, credentials : AuthenticationCredentials):
         user = session.exec(statement).first()
 
         # Verify password
-        if(user != None and request.app.state.password_hasher.verify(user.password_hash, credentials.password)):
+        if(user != None and verifyHash(request.app.state.password_hasher, user.password_hash, credentials.password)):
             return jwt.encode(
                 {"username" : credentials.username}, 
                 request.app.state.JWT_SECRET_KEY

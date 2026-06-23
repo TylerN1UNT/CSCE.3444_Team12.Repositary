@@ -3,5 +3,5 @@ curl -v \
   -H "Content-Type: application/json" \
   -d '{
     "username": "alice",
-    "password": "secrets"
+    "password": "secret"
   }'

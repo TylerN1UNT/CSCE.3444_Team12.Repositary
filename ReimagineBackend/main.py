@@ -1,28 +1,33 @@
 import os
 import argon2
 from fastapi.concurrency import asynccontextmanager
-import jwt
 
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from models.user import User
-from sqlmodel import create_engine, SQLModel, Session, select
+from fastapi import FastAPI
+from fastapi.security import HTTPBearer
+from sqlmodel import create_engine, SQLModel
 from routes.auth import router as auth_router
+from routes.inference import router as inference_router
+from openai import AzureOpenAI
 
 
 # Manage server lifecycle
 @asynccontextmanager
 async def lifespan(app: FastAPI):
 
-    # Load keys
-    load_dotenv() # Read .env file into local environment
-    app.state.INFERENCE_API_KEY = os.getenv("INFERENCE_API_KEY")
-    app.state.JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+    # Load environment variables to local environment
+    load_dotenv()
 
-    # Initialize Server
+    # Initialize Security
+    app.state.JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
     app.state.password_hasher = argon2.PasswordHasher()
     app.state.security = HTTPBearer()
+
+    # Initialize Azure OpenAI Client
+    INFERENCE_API_KEY = os.getenv("INFERENCE_API_KEY")
+    INFERENCE_API_VERSION = os.getenv("INFERENCE_API_VERSION")
+    INFERENCE_API_ENDPOINT = os.getenv("INFERENCE_OPENAI_ENDPOINT")
+    app.state.openaiClient = AzureOpenAI(INFERENCE_API_KEY, INFERENCE_API_VERSION, INFERENCE_API_ENDPOINT)
     
     # Initialize DB
     SQL_DATABASE_URL = os.getenv("SQL_DATABASE_URL")
@@ -32,9 +37,10 @@ async def lifespan(app: FastAPI):
     yield
 
 
-# Initialize server
+# Connect routes
 app = FastAPI(lifespan=lifespan)
 app.include_router(auth_router)
+app.include_router(inference_router)
 
 
         

@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from sqlmodel import create_engine, SQLModel
+from config import *
 from routes.auth import router as auth_router
 from routes.inference import router as inference_router
 from openai import AzureOpenAI
@@ -25,9 +26,8 @@ async def lifespan(app: FastAPI):
 
     # Initialize Azure OpenAI Client
     INFERENCE_API_KEY = os.getenv("INFERENCE_API_KEY")
-    INFERENCE_API_VERSION = os.getenv("INFERENCE_API_VERSION")
-    INFERENCE_API_ENDPOINT = os.getenv("INFERENCE_OPENAI_ENDPOINT")
-    app.state.openaiClient = AzureOpenAI(INFERENCE_API_KEY, INFERENCE_API_VERSION, INFERENCE_API_ENDPOINT)
+    INFERENCE_API_ENDPOINT = os.getenv("INFERENCE_API_ENDPOINT")
+    app.state.inferenceClient = AzureOpenAI(INFERENCE_API_KEY, INFERENCE_API_VERSION, INFERENCE_API_ENDPOINT)
     
     # Initialize DB
     SQL_DATABASE_URL = os.getenv("SQL_DATABASE_URL")

@@ -3,6 +3,7 @@ import argon2
 from fastapi import APIRouter, Depends,  HTTPException, Request
 import jwt
 from pydantic import BaseModel
+from config import *
 from models.user import User
 from sqlmodel import Session, select
 
@@ -27,7 +28,7 @@ def signup(request : Request, credentials : AuthenticationCredentials): # Sendin
         session.commit()
 
     # Generate the JWT
-    return jwt.encode({"username" : credentials.username}, request.app.state.JWT_SECRET_KEY, algorithm="HS256")
+    return jwt.encode({"username" : credentials.username}, request.app.state.JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
 
 
 # Verifies if plaintext patches a hash
@@ -54,7 +55,8 @@ def login(request : Request, credentials : AuthenticationCredentials):
         if(user != None and verifyHash(request.app.state.password_hasher, user.password_hash, credentials.password)):
             return jwt.encode(
                 {"username" : credentials.username}, 
-                request.app.state.JWT_SECRET_KEY
+                request.app.state.JWT_SECRET_KEY,
+                algorithm=JWT_ALGORITHM
             )
         else: 
             raise HTTPException(

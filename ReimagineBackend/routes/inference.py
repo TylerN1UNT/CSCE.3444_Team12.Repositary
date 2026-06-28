@@ -11,7 +11,6 @@ class InferenceRequest(BaseModel):
     image_data: str # Base64
     image_type: str # png, jpg, etc (passed to the model)
 
-e
 router = APIRouter()
 
 """
@@ -82,11 +81,11 @@ def analyze_image(
 def generateImageChangelist(client: AzureOpenAI, inferenceRequest: InferenceRequest) -> str:
     
     # Construct image data URL 
-    data_url = f"data:{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
+    data_url = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
 
     return  client.responses.create(
             model="gpt-5",
-            messages=[
+            input=[
                 
                 # Setup instructions & constaints
                 {   
@@ -111,11 +110,11 @@ def generateImageChangelist(client: AzureOpenAI, inferenceRequest: InferenceRequ
                     "role": "user",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": inferenceRequest.user_prompt
                         },
                         {
-                            "type": "image_url",
+                            "type": "input_image",
                             "image_url": data_url
                         }
                     ]
@@ -126,8 +125,7 @@ def generateImageChangelist(client: AzureOpenAI, inferenceRequest: InferenceRequ
 @router.post("/inference")
 def inference(request: Request, inferenceRequest: InferenceRequest): # TODO: Write this function
 
-    client : AzureOpenAI = request.app.inferenceClient
-
+    client : AzureOpenAI = request.app.state.inferenceClient
     changelist: str = generateImageChangelist(client, inferenceRequest)
     
     # Algorithm steps:
@@ -136,7 +134,7 @@ def inference(request: Request, inferenceRequest: InferenceRequest): # TODO: Wri
     # 3) Pass changelist + image to Stable Diffusion model to generate image
     # 4) Return image
     
-    pass
+    return changelist
 
 # We have multiple ways to do this:
 # 1) We expose only one inference endpoint and handle the pipeline server side

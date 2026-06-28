@@ -2,6 +2,3 @@
 
 # Security
 JWT_ALGORITHM = "HS256"
-
-# Inference Endpoints
-INFERENCE_API_VERSION="2025-04-01-preview"

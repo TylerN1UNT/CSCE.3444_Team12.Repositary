@@ -11,3 +11,10 @@ This server also provides a uniform API for our mobile app to call through
 ## Database
 
 Reimagine's Backend uses SQLite for its database. This makes it extremely lightweight
+
+## Usage
+
+fastapi dev (for development)
+fastapi run (for production)
+
+Then just access via HTTP (see test folders for example)

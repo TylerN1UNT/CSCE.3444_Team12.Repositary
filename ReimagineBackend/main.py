@@ -9,7 +9,7 @@ from sqlmodel import create_engine, SQLModel
 from config import *
 from routes.auth import router as auth_router
 from routes.inference import router as inference_router
-from openai import AzureOpenAI, OpenAI
+from openai import OpenAI
 
 
 # Manage server lifecycle

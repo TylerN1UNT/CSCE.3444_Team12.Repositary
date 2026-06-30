@@ -1,5 +1,5 @@
 # Home for inference routes
-from openai import AzureOpenAI
+from openai import OpenAI
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
@@ -78,7 +78,7 @@ def analyze_image(
 """
 
 
-def generateImageChangelist(client: AzureOpenAI, inferenceRequest: InferenceRequest) -> str:
+def generateImageChangelist(client: OpenAI, inferenceRequest: InferenceRequest) -> str:
     
     # Construct image data URL 
     data_url = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
@@ -125,7 +125,7 @@ def generateImageChangelist(client: AzureOpenAI, inferenceRequest: InferenceRequ
 @router.post("/inference")
 def inference(request: Request, inferenceRequest: InferenceRequest): # TODO: Write this function
 
-    client : AzureOpenAI = request.app.state.inferenceClient
+    client : OpenAI = request.app.state.inferenceClient
     changelist: str = generateImageChangelist(client, inferenceRequest)
     
     # Algorithm steps:

@@ -122,12 +122,28 @@ def generateImageChangelist(client: OpenAI, inferenceRequest: InferenceRequest) 
             ]
     )
 
+def editImage(client: OpenAI,inferenceRequest: InferenceRequest,changeList: str) -> str:
+
+    changeList = generateImageChangelist(client, inferenceRequest)
+
+    imageBytes = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
+    response = client.images.edit(
+        model = "gpt-5",
+        image = imageBytes,
+        prompt = f"""{changeList} 
+                  Do not alter perspective or room layout
+                  Only Return the Listed Edits 
+                  """
+    )
+    return response.data[0].b64_json
+
 @router.post("/inference")
 def inference(request: Request, inferenceRequest: InferenceRequest): # TODO: Write this function
 
     client : OpenAI = request.app.state.inferenceClient
     changelist: str = generateImageChangelist(client, inferenceRequest)
-    
+
+
     # Algorithm steps:
     # 1) Get image from post parameters
     # 2) Send image to Azure openAI transformer and generate changelist

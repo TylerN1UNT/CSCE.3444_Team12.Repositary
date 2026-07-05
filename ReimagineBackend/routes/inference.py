@@ -1,4 +1,6 @@
 # Home for inference routes
+import base64
+from io import BytesIO
 from openai import OpenAI
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
@@ -83,7 +85,7 @@ def generateImageChangelist(client: OpenAI, inferenceRequest: InferenceRequest) 
     # Construct image data URL 
     data_url = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
 
-    return  client.responses.create(
+    response = client.responses.create(
             model="gpt-5",
             input=[
                 
@@ -122,36 +124,37 @@ def generateImageChangelist(client: OpenAI, inferenceRequest: InferenceRequest) 
             ]
     )
 
-def editImage(client: OpenAI,inferenceRequest: InferenceRequest,changeList: str) -> str:
+    return response.output_text
 
-    changeList = generateImageChangelist(client, inferenceRequest)
+def editImage(client: OpenAI, inferenceRequest: InferenceRequest, changelist: str) -> str:
+    
+    # Construct image data URL 
+    # data_url = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
+    
+    # Construct in-memory file over base64 bytes
+    image_file = BytesIO(base64.b64decode(inferenceRequest.image_data))
+    image_file.name = "image_to_edit." + inferenceRequest.image_type
 
-    imageBytes = f"data:image/{inferenceRequest.image_type};base64,{inferenceRequest.image_data}"
+    # Construct prompt
+    constraints = """ 
+
+        - Do not change camera view or perspective. 
+        - Do not destroy structural details.
+    
+    """
+    edit_prompt = constraints + changelist
+                                          
     response = client.images.edit(
-        model = "gpt-5",
-        image = imageBytes,
-        prompt = f"""{changeList} 
-                  Do not alter perspective or room layout
-                  Only Return the Listed Edits 
-                  """
+        model="gpt-image-2",
+        image=image_file,
+        prompt=edit_prompt
     )
+
     return response.data[0].b64_json
 
 @router.post("/inference")
-def inference(request: Request, inferenceRequest: InferenceRequest): # TODO: Write this function
+def inference(request: Request, inferenceRequest: InferenceRequest):
 
     client : OpenAI = request.app.state.inferenceClient
     changelist: str = generateImageChangelist(client, inferenceRequest)
-
-
-    # Algorithm steps:
-    # 1) Get image from post parameters
-    # 2) Send image to Azure openAI transformer and generate changelist
-    # 3) Pass changelist + image to Stable Diffusion model to generate image
-    # 4) Return image
-    
-    return changelist
-
-# We have multiple ways to do this:
-# 1) We expose only one inference endpoint and handle the pipeline server side
-# 2) We expose two interference endpoints and orchestrate the pipeline client side
+    return {"image": editImage(client, inferenceRequest, changelist)}

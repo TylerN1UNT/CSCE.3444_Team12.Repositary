@@ -1,4 +1,2 @@
-# SERVER CONFIG
-
 # Security
 JWT_ALGORITHM = "HS256"

@@ -29,7 +29,7 @@ const HomeTab: React.FC = () => {
         {/* Content */}
         <div style={{display: 'flex' , flexDirection : 'column', alignItems: 'center', width: '100vw', height: '100vh'}}>
 
-            <img style={{width : '95%', height: '40%', backgroundColor: 'yellow', marginTop: '10px'}}/>
+            <img style={{width : '95%', height: '40%', backgroundColor: 'blue', marginTop: '10px'}}/>
 
 
             <div style={{display : 'flex', flexDirection : 'column', width : '30%'}}>

@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 
 enum RemodelState {
   Idle,
-  Uploading
+  Uploading,
   Processing,
-  Completed 
+  Completed, 
   Error,
 }
 

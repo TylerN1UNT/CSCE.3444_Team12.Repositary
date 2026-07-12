@@ -29,12 +29,12 @@ const HomeTab: React.FC = () => {
         {/* Content */}
         <div style={{display: 'flex' , flexDirection : 'column', alignItems: 'center', width: '100vw', height: '100vh'}}>
 
-            <img style={{width : '95%', height: '40%', backgroundColor: 'yellow', marginTop: '10px'}}/>
+            <img src="/Reimagine.png" alt="Reimagine" style={{width : '95%', height: '40%', marginTop: '10px'}}/>
 
 
             <div style={{display : 'flex', flexDirection : 'column', width : '30%'}}>
               
-              <h1 style={{fontWeight : 'bold'}}> Redesign your space with AI</h1>
+              <h1 style={{fontWeight : 'bold'}}> Redesign your Living Space with AI</h1>
               <p>Upload a photo of your room and let AI create stunning designs for you.</p>
               
               <IonButton color="dark" routerLink='/upload'>

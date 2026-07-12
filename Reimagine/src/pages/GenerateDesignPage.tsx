@@ -34,7 +34,7 @@ const GenerateDesignPage: React.FC = () => {
               <span>50%</span>
             </div>
 
-            <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke'}}>
+            <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke', color: 'black'}}>
               <img style={{width: '25px', height: '25px', backgroundColor: 'yellow', marginRight: '20px', marginLeft: '20px'}}/>
               <b style={{marginRight: '5px'}}>Tip:</b>
               <span>More details you provide = better results!</span>

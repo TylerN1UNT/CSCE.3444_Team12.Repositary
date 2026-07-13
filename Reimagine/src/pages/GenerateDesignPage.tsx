@@ -1,9 +1,57 @@
+import { MediaResults } from '@capacitor/camera';
 import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonProgressBar, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
+
+interface PrevState // State from the previous page
+{
+    photo: MediaResults | null, 
+    color: string, 
+    style: string, 
+}
 
 const GenerateDesignPage: React.FC = () => {
-  
-  const [additionalPreferences, setDesignStyle] = useState('');
+
+  const location = useLocation()
+  const history = useHistory()
+  const prevState: PrevState = location.state as PrevState
+  const photo = prevState.photo
+  const inferenceURL = "localhost:8080/inference"
+
+  function constructPrompt(prevState: PrevState): string
+  {
+      return ("Reimagine this room in a " 
+                + prevState.style 
+                + " style " 
+                + " with a " 
+                + prevState.color 
+                + " color scheme"
+            )
+  }
+
+  async function inference(prompt: string, photo: MediaResults)
+  {
+      return await fetch(inferenceURL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          // INSERT DATA HERE (REFERENCE THE TEST API CALL)
+        })
+      })
+  }
+
+  useEffect(() => {
+    // Algorithm:
+
+    // 1) Create prompt string from prevstate
+    let prompt = constructPrompt(prevState)
+    
+    // 2) Fetch result image via inference server (use fetch API)
+    const response = inference(prompt, photo) // TODO: Add null checks
+
+    // 3) Navigate to results page (new page) and pass the base64 output string there
+    // TODO: Implement this
+  })
   
   return (
     <>

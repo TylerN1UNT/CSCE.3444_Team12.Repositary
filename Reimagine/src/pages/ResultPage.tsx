@@ -42,18 +42,22 @@ const ResultPage: React.FC = () => {
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
+       
+        {/* TEST HEADER: For Debugging Purposes only*/}
         {/*<h1> Results Testing</h1> */}
         {/* Before / After Images */}
 
+        {/* NOTE: For testing purposes the Before Image has a temporary background of yellow and After Image has a temporary background color of Blue */}
+
         <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
           <div>
-            <img src={ prevState?.photo?.webPath ?? "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px"}} />
+            <img src={ prevState?.photo?.webPath ?? "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px", backgroundColor: 'yellow'}} />
             <p style={{textAlign:"center"}}>
               Original Room
             </p>
           </div>
           <div>
-            <img src={prevState?.generatedImage ?? ""} style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px" }} />
+            <img src={prevState?.generatedImage ?? ""} style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px", backgroundColor: 'blue'}} />
             <p style={{textAlign:"center"}}>
               AI Designed Room
             </p>

@@ -41,6 +41,14 @@ const GenerateDesignPage: React.FC = () => {
   }
 
   useEffect (() => {
+    
+    // Null Check: 
+
+    if (!photo || !prevState ) {
+      console.error("ERROR - No data available");
+      return;
+    }
+
     // Algorithm:
 
     // 1) Create prompt string from prevstate
@@ -55,8 +63,8 @@ const GenerateDesignPage: React.FC = () => {
 
     // generateImage(); ? 
 
-    //TODO Create the Results Page 
-  }, [prevState, photo])
+    //TODO Create the results Page 
+  }, [prevState, photo, history])
 
   return (
     <>

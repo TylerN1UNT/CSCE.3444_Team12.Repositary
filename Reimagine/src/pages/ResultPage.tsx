@@ -42,28 +42,26 @@ const ResultPage: React.FC = () => {
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
-        <h1> Results Testing</h1>
+        {/*<h1> Results Testing</h1> */}
         {/* Before / After Images */}
 
-       { /* <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
+        <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
           <div>
-            <img src={ prevState.photo ? prevState.photo.webPath: "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px"}} />
+            <img src={ prevState?.photo?.webPath ?? "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px"}} />
             <p style={{textAlign:"center"}}>
               Original Room
             </p>
           </div>
           <div>
-            <img src={prevState.generatedImage} style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px" }} />
+            <img src={prevState?.generatedImage ?? ""} style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px" }} />
             <p style={{textAlign:"center"}}>
               AI Designed Room
             </p>
           </div>
-        </div> */}
+        </div> 
 
         {/* Action Buttons */}
-
-        { /* 
-
+        {/*
         <div style={{display:"flex", justifyContent:"center", gap:"10px", marginTop:"30px"}}>
           <IonButton fill="outline">
             <IonIcon slot="start" icon={refreshOutline} />

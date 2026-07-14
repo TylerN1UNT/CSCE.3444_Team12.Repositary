@@ -1,0 +1,6 @@
+Paste the following into a file called .env and add your data
+
+INFERENCE_API_KEY="<YOUR_API_KEY>"
+INFERENCE_API_ENDPOINT="<YOUR_AZURE_ENDPOINT>"
+SQL_DATABASE_URL="sqlite:///database.db"
+JWT_SECRET_KEY="<ANY_RANDOM_STRING>"

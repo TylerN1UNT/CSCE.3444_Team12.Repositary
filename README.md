@@ -29,4 +29,10 @@ feature/ai
  database for interior design formats
 
 
+## How to Run
+
+To install required dependencies: `npm install`
+To run app in web browser: `ionic serve`
+
+
 

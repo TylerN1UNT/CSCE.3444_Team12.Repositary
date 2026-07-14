@@ -40,7 +40,7 @@ const GenerateDesignPage: React.FC = () => {
       })
   }
 
-  useEffect(() => {
+  useEffect (() => {
     // Algorithm:
 
     // 1) Create prompt string from prevstate
@@ -50,9 +50,14 @@ const GenerateDesignPage: React.FC = () => {
     const response = inference(prompt, photo) // TODO: Add null checks
 
     // 3) Navigate to results page (new page) and pass the base64 output string there
-    // TODO: Implement this
-  })
-  
+
+    history.push( '/results', { image: response });
+
+    // generateImage(); ? 
+
+    //TODO Create the Results Page 
+  }, [prevState, photo])
+
   return (
     <>
 
@@ -82,7 +87,7 @@ const GenerateDesignPage: React.FC = () => {
               <span>50%</span>
             </div>
 
-            <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke'}}>
+            <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke', color: 'black'}}>
               <img style={{width: '25px', height: '25px', backgroundColor: 'yellow', marginRight: '20px', marginLeft: '20px'}}/>
               <b style={{marginRight: '5px'}}>Tip:</b>
               <span>More details you provide = better results!</span>
@@ -96,6 +101,6 @@ const GenerateDesignPage: React.FC = () => {
     
     </>
   );
-};
+}; 
 
 export default GenerateDesignPage;

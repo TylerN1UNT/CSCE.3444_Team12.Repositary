@@ -31,35 +31,50 @@ const GenerateDesignPage: React.FC = () => {
 
   async function inference(prompt: string, photo: MediaResults)
   {
-      return await fetch(inferenceURL, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          // INSERT DATA HERE (REFERENCE THE TEST API CALL)
-        })
-      })
+      // return await fetch(inferenceURL, {
+      //   method: "POST",
+      //   headers: {"Content-Type": "application/json"},
+      //   body: JSON.stringify({
+      //     // INSERT DATA HERE (REFERENCE THE TEST API CALL)
+      //   })
+      // })
+
+      // [DEBUG ONLY] Return a fake base64 string corresponding to a right arrow svg
+      
+      return `
+  
+      PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBT
+      VkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xz
+      IC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAy
+      NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRo
+      IGQ9Ik0xMCA3TDE1IDEyTDEwIDE3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41
+      IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3Zn
+      Pg==
+
+      `
   }
 
   useEffect (() => {
     
-    // Null Check: 
+    // // Null Check: 
 
     if (!photo || !prevState ) {
       console.error("ERROR - No data available");
       return;
     }
+
     // Question - should this be an async function? 
     // Algorithm:
 
-    // 1) Create prompt string from prevstate
+    // // 1) Create prompt string from prevstate
     let prompt = constructPrompt(prevState)
     
-    // 2) Fetch result image via inference server (use fetch API)
+    // // 2) Fetch result image via inference server (use fetch API)
     const response = inference(prompt, photo) // TODO: Add null checks
 
-    // 3) Navigate to results page (new page) and pass the base64 output string there
+    // // 3) Navigate to results page (new page) and pass the base64 output string there
 
-    history.push( '/results', { image: response });g 
+    history.push( '/results', { image: response }); 
 
     //TODO Create the results Page 
   }, [prevState, photo, history])

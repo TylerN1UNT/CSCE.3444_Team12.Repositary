@@ -49,6 +49,7 @@ import './theme/variables.css';
 import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
+import ResultPage from './pages/ResultPage';
 
 setupIonicReact();
 
@@ -87,6 +88,10 @@ const App: React.FC = () => (
 
         <Route exact path="/generating-design">
             <GenerateDesignPage/>
+        </Route>
+
+        <Route exact path="/results">
+            <ResultPage/>
         </Route>
 
         {/* New Route */}

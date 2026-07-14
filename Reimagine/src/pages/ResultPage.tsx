@@ -1,5 +1,6 @@
 import { MediaResults } from '@capacitor/camera';
-import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonProgressBar, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonProgressBar, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
+import {  refreshOutline, optionsOutline, heartOutline, downloadOutline} from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
@@ -31,20 +32,18 @@ const ResultPage: React.FC = () => {
 
           <IonButtons slot="end">
 
-           { /*<IonButton>
+            <IonButton>
               <IonIcon icon={heartOutline}/>
             </IonButton> 
 
             <IonButton>
               <IonIcon icon={downloadOutline}/>
-            </IonButton>*/}
+            </IonButton>
           </IonButtons>
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
-       
-        {/* TEST HEADER: For Debugging Purposes only*/}
-        {/*<h1> Results Testing</h1> */}
+  
         {/* Before / After Images */}
 
         {/* NOTE: For testing purposes the Before Image has a temporary background of yellow and After Image has a temporary background color of Blue */}
@@ -65,7 +64,7 @@ const ResultPage: React.FC = () => {
         </div> 
 
         {/* Action Buttons */}
-        {/*
+        
         <div style={{display:"flex", justifyContent:"center", gap:"10px", marginTop:"30px"}}>
           <IonButton fill="outline">
             <IonIcon slot="start" icon={refreshOutline} />
@@ -76,24 +75,24 @@ const ResultPage: React.FC = () => {
             Edit Preferences
           </IonButton>
         </div>
-
+        
         <div style={{display:"flex", justifyContent:"center", gap:"10px", marginTop:"15px"}}>
-
           <IonButton>
             <IonIcon slot="start" icon={heartOutline} />
             Save
           </IonButton>
-
-           <IonButton>
+          <IonButton>
             <IonIcon slot="start" icon={downloadOutline} />
             Download
           </IonButton>
         </div>
 
+        
+
         <p style={{textAlign:"center", marginTop:"25px", color:"gray"}}>
           Not satisfied? Regenerate or adjust your preferences.
         </p>
-        */}
+        
                
       </IonContent>
     </IonPage>

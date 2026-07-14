@@ -14,8 +14,8 @@ const GenerateDesignPage: React.FC = () => {
 
   const location = useLocation()
   const history = useHistory()
-  const prevState: PrevState = location.state as PrevState
-  const photo = prevState.photo
+  const prevState: PrevState = location.state as PrevState | undefined
+  const photo = prevState?.photo ?? null
   const inferenceURL = "localhost:8080/inference"
 
   function constructPrompt(prevState: PrevState): string
@@ -67,14 +67,14 @@ const GenerateDesignPage: React.FC = () => {
     // Algorithm:
 
     // // 1) Create prompt string from prevstate
-    let prompt = constructPrompt(prevState)
+     let prompt = constructPrompt(prevState)
     
     // // 2) Fetch result image via inference server (use fetch API)
-    const response = inference(prompt, photo) // TODO: Add null checks
+     const response = inference(prompt, photo) // TODO: Add null checks
 
     // // 3) Navigate to results page (new page) and pass the base64 output string there
 
-    history.push( '/results', { image: response }); 
+     history.push( '/results', { image: response }); 
 
     //TODO Create the results Page 
   }, [prevState, photo, history])

@@ -48,7 +48,7 @@ const GenerateDesignPage: React.FC = () => {
       console.error("ERROR - No data available");
       return;
     }
-
+    // Question - should this be an async function? 
     // Algorithm:
 
     // 1) Create prompt string from prevstate
@@ -59,9 +59,7 @@ const GenerateDesignPage: React.FC = () => {
 
     // 3) Navigate to results page (new page) and pass the base64 output string there
 
-    history.push( '/results', { image: response });
-
-    // generateImage(); ? 
+    history.push( '/results', { image: response });g 
 
     //TODO Create the results Page 
   }, [prevState, photo, history])

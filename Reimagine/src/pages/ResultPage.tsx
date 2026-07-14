@@ -18,7 +18,7 @@ const ResultPage: React.FC = () => {
 
   return (
     <>
-
+  {/* NOTE: This is first draft, however, the next item on the TODO List is to find the bugs breaking the code......*/}
 
     {/* Page Contents */}
     <IonPage>

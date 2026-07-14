@@ -31,21 +31,21 @@ const ResultPage: React.FC = () => {
 
           <IonButtons slot="end">
 
-            <IonButton>
+           { /*<IonButton>
               <IonIcon icon={heartOutline}/>
-            </IonButton>
+            </IonButton> 
 
             <IonButton>
               <IonIcon icon={downloadOutline}/>
-            </IonButton>
+            </IonButton>*/}
           </IonButtons>
       </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
-        
+        <h1> Results Testing</h1>
         {/* Before / After Images */}
 
-        <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
+       { /* <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
           <div>
             <img src={ prevState.photo ? prevState.photo.webPath: "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px"}} />
             <p style={{textAlign:"center"}}>
@@ -58,9 +58,11 @@ const ResultPage: React.FC = () => {
               AI Designed Room
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* Action Buttons */}
+
+        { /* 
 
         <div style={{display:"flex", justifyContent:"center", gap:"10px", marginTop:"30px"}}>
           <IonButton fill="outline">
@@ -89,6 +91,7 @@ const ResultPage: React.FC = () => {
         <p style={{textAlign:"center", marginTop:"25px", color:"gray"}}>
           Not satisfied? Regenerate or adjust your preferences.
         </p>
+        */}
                
       </IonContent>
     </IonPage>

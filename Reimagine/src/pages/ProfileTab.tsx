@@ -6,7 +6,7 @@ enum RemodelState {
   Idle,
   Uploading,
   Processing,
-  Completed,
+  Completed, 
   Error,
 }
 

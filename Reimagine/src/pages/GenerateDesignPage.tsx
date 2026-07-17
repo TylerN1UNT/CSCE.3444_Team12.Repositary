@@ -1,10 +1,98 @@
+import { MediaResults } from '@capacitor/camera';
 import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonProgressBar, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import Photo from '../Photo';
+
+interface PrevState // State from the previous page
+{
+    photo: Photo, 
+    color: string, 
+    style: string, 
+}
+
+// Matches the corresponding JSON in the inference server
+interface InferenceResponse
+{
+    image: string,
+}
 
 const GenerateDesignPage: React.FC = () => {
+
+  const location = useLocation()
+  const history = useHistory()
+  const prevState: PrevState = location.state as PrevState
+  const inferenceURL = "http://localhost:8000/inference"
+
+  const [inferenceResponse, setInferenceResponse] = useState<InferenceResponse>();
+
+  function constructPrompt(prevState: PrevState): string
+  {
+      return ("Reimagine this room in a " 
+                + prevState.style 
+                + " style " 
+                + " with a " 
+                + prevState.color 
+                + " color scheme"
+            )
+  }
+
+  async function inference(prompt: string, photo: Photo)
+  {
+      return fetch(inferenceURL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            image_data: photo.data,
+            image_type: photo.type,
+            user_prompt: prompt 
+        })
+      })
+
+      // console.log("RESPONSE:" + response)
+
+      // setInferenceResponse(await response.json() as InferenceResponse)
+          
+
+      // [DEBUG ONLY] Return a fake base64 string corresponding to a right arrow svg
+      
+      // setInferenceResponse(`
   
-  const [additionalPreferences, setDesignStyle] = useState('');
-  
+      // PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBT
+      // VkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xz
+      // IC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAy
+      // NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRo
+      // IGQ9Ik0xMCA3TDE1IDEyTDEwIDE3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41
+      // IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3Zn
+      // Pg==
+
+      // `)
+  }
+
+  useEffect (() => {
+    
+    // Generate Prompt
+    let prompt = constructPrompt(prevState)
+
+    // Run inference
+    inference(prompt, prevState.photo).then((response:Response) => 
+    {
+      // Deserialize JSON response
+      response.json().then((inferenceResponse: InferenceResponse) => 
+      {
+
+        // Navigate to results page
+        let inferencePhoto = new Photo(inferenceResponse!.image, "png") // Inference server always returns PNG
+        history.push( '/results', 
+        {
+          originalImage: prevState.photo, 
+          inferenceImage: inferencePhoto
+        })
+     })
+    }); 
+
+  }, [])
+
   return (
     <>
 
@@ -43,11 +131,13 @@ const GenerateDesignPage: React.FC = () => {
         </div>
 
         
+
+        
       </IonContent>
     </IonPage>
     
     </>
   );
-};
+}; 
 
 export default GenerateDesignPage;

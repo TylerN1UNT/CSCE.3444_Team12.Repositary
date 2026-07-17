@@ -1,9 +1,36 @@
+import { MediaResults } from '@capacitor/camera';
 import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
+import IdentifiableButton from '../components/IdentifiableButton';
+import Photo from '../Photo';
+
+interface PrevState // State from the previous page
+{
+    photo: Photo // Base64 encoded
+}
 
 const DesignPreferencesPage: React.FC = () => {
   
-  const [additionalPreferences, setDesignStyle] = useState('');
+  const [additionalPreferences, setAdditionalPreferences] = useState('');
+
+  const location = useLocation()
+  const history = useHistory()
+
+  // Contains the image passed from the UploadPhotoPage
+  const prevState: PrevState = location.state as PrevState
+  const photo = prevState.photo;
+
+
+  // Design preferences states
+  const [style, setStyle] = useState("")
+  const [color, setColor] = useState("")  
+
+  function nextPage()
+  {
+      history.push("/generating-design", { style, color, photo })
+  }
+
   
   return (
     <>
@@ -31,38 +58,61 @@ const DesignPreferencesPage: React.FC = () => {
 
           <b> Choose style </b>
           <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'space-evenly'}}>
-              
-              <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
 
-              <IonButton fill="clear">
+              <IdentifiableButton fill="clear" id="victorian" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
+              </IdentifiableButton>
 
-              <IonButton fill="clear">
+              <IdentifiableButton fill="clear" id="modern" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
+              </IdentifiableButton>
 
-              <IonButton fill="clear">
+              <IdentifiableButton fill="clear" id="brutalist" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
+              </IdentifiableButton>
 
-              <IonButton fill="clear">
+              <IdentifiableButton fill="clear" id="baroque" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="gothic" callback={(id)=>{setStyle(id)}}>
+                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="rococo" callback={(id)=>{setStyle(id)}}>
+                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
+              </IdentifiableButton>
               
           </div>
 
           <span> Color mood (optional) </span>
-          <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'start'}}>
-          <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'silver', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'white', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'lightgrey', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'darkgrey', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'gray', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'black', marginRight: '20px'}}/>
-          </div>
+            
+            <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'start'}}>
+              
+              <IdentifiableButton fill="clear" id="silver" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'silver', marginRight: '20px'}}/>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="white" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'white', marginRight: '20px'}}/>
+              </IdentifiableButton>
+                
+              <IdentifiableButton fill="clear" id="lightgrey" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'lightgrey', marginRight: '20px'}}/>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="darkgrey" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'darkgrey', marginRight: '20px'}}/>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="gray" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'gray', marginRight: '20px'}}/>
+              </IdentifiableButton>
+
+              <IdentifiableButton fill="clear" id="black" callback={(id)=>{setColor(id)}}>
+                <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'black', marginRight: '20px'}}/>
+              </IdentifiableButton>
+            </div>
 
           <div style={{display : 'inline'}}>
                 <b> Additional Preferences </b>
@@ -75,7 +125,7 @@ const DesignPreferencesPage: React.FC = () => {
                 placeholder="Favorite Fruit" 
                 interface="action-sheet"
                 value={additionalPreferences}
-                onIonChange={e => setDesignStyle(e.detail.value)}
+                onIonChange={e => setAdditionalPreferences(e.detail.value)}
               >
                 <IonSelectOption value="apple">Apple</IonSelectOption>
                 <IonSelectOption value="banana">Banana</IonSelectOption>
@@ -84,7 +134,8 @@ const DesignPreferencesPage: React.FC = () => {
             </IonItem>
           </IonList>
 
-          <IonButton color="dark" expand='full' routerLink='/generating-design'> Generate Design </IonButton>
+          <IonButton color="dark" expand='full' onClick={nextPage} disabled={style === "" || color === ""}> Generate Design </IonButton>
+          
         </div>
       </IonContent>
     </IonPage>

@@ -5,6 +5,7 @@ from fastapi.concurrency import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
+from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import create_engine, SQLModel
 from config import *
 from routes.auth import router as auth_router
@@ -44,6 +45,16 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(auth_router)
 app.include_router(inference_router)
 
+# Setup cors (allows frontend to talk to backend)
+origins = [ "http://localhost:8100"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,            
+    allow_credentials=True,           
+    allow_methods=["*"],              
+    allow_headers=["*"]
+)
 
         
         

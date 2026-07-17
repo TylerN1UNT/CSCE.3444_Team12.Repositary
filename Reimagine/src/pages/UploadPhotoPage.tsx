@@ -1,11 +1,55 @@
 import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import "./UploadPhotoPage.css"
 import "./ClickPassthrough.css"
+import { Camera, MediaResults, MediaTypeSelection } from '@capacitor/camera';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
+import { Capacitor } from '@capacitor/core';
+import { Filesystem } from '@capacitor/filesystem';
+import Photo from '../Photo';
 
 const UploadPhotoPage: React.FC = () => {
   const [roomType, setRoomType] = useState('');
   const [designStyle, setDesignStyle] = useState('');
+
+  const history = useHistory()
+  const [photo, setPhoto] = useState<Photo>();
+
+  async function selectPhoto()
+  {
+    let selectedPhoto : MediaResults = await Camera.chooseFromGallery({
+      mediaType: MediaTypeSelection.Photo,
+      allowMultipleSelection: false,
+      includeMetadata: true // We need format metadata
+    })
+
+    let resultPhoto = selectedPhoto.results[0]
+    let photoDataBase64 = ""
+    let photoFormat = resultPhoto.metadata!.format
+
+    if (Capacitor.isNativePlatform() && resultPhoto.uri) // On native & uri is available
+    {
+      // Read the original image from disk
+      const file = await Filesystem.readFile({
+        path: resultPhoto.uri,
+      });
+    
+      photoDataBase64 = file.data as string;
+    } 
+    else if(resultPhoto.thumbnail) // On the web & thumbnail is available
+    {
+      // On the web, thumbnail contains the full image
+      photoDataBase64 = resultPhoto.thumbnail;
+    }
+
+    let result = new Photo(photoDataBase64, photoFormat)
+    setPhoto(result)
+  }
+
+  function nextPage()
+  {
+      history.push("/design-preferences", { photo })
+  }
 
   return (
     <>
@@ -32,7 +76,7 @@ const UploadPhotoPage: React.FC = () => {
                   
                   <img style={{width: '50px', height: '50px', backgroundColor: 'yellow'}}/>
                   <p>Upload a clear photo of your room</p>
-                  <IonButton color="light"> Choose Photo </IonButton>
+                  <IonButton color="light" onClick={selectPhoto}> Choose Photo </IonButton>
                   
                 </div>
 
@@ -76,7 +120,7 @@ const UploadPhotoPage: React.FC = () => {
       
                   <span>You can customize more later</span>
 
-                  <IonButton color="dark" routerLink='/design-preferences'>Next</IonButton>
+                  <IonButton color="dark" onClick={nextPage} disabled={photo === undefined}>Next</IonButton>
                 </div>
             </div>
 

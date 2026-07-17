@@ -37,7 +37,8 @@ const ProfileTab: React.FC = () => {
     } catch (err) {
       setState(RemodelState.Error);
     }
-  }
+  };
+ 
   return (
     <IonPage>
       <IonHeader>
@@ -45,12 +46,54 @@ const ProfileTab: React.FC = () => {
           <IonTitle>Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
+
+        <div style={{ padding: 16 }}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ marginBottom: 16 }}
+          />
+
+          {state === RemodelState.Uploading && (
+            <div>
+              <IonSpinner /> Uploading image...
+            </div>
+          )}
+
+          {state === RemodelState.Processing && (
+            <div>
+              <IonSpinner /> Remodeling your room...
+            </div>
+          )}
+
+          {state === RemodelState.Error && (
+            <div style={{ color: 'red' }}>
+              Something went wrong. Try again.
+            </div>
+          )}
+
+          {originalImage && (
+            <div>
+              <h3>Original Image:</h3>
+              <IonImg src={originalImage} />
+            </div>
+          )}
+
+          {remodeledImage && (
+            <div>
+              <h3>Remodeled Image:</h3>
+              <IonImg src={remodeledImage} />
+            </div>
+          )}
+        </div>
       </IonContent>
     </IonPage>
   );

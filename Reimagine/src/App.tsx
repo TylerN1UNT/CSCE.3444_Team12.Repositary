@@ -49,6 +49,7 @@ import './theme/variables.css';
 import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
+import ResultPage from './pages/ResultPage';
 
 setupIonicReact();
 
@@ -58,6 +59,7 @@ const App: React.FC = () => (
 
       {/* Setup Pages routing */}
       <IonTabs>
+
         <IonRouterOutlet>
           <Route exact path="/home">
             <HomeTab/>
@@ -75,15 +77,24 @@ const App: React.FC = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
+
         <Route exact path="/upload">
           <UploadPhotoPage/>
         </Route>
+
         <Route exact path="/design-preferences">
           <DesignPreferencesPage/>
         </Route>
+
         <Route exact path="/generating-design">
             <GenerateDesignPage/>
         </Route>
+
+        <Route exact path="/results">
+            <ResultPage/>
+        </Route>
+
+        {/* New Route */}
 
         {/* Setup the Bottom navigation tabs */}
         <IonTabBar slot="bottom">

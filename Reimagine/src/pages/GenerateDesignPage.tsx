@@ -2,21 +2,29 @@ import { MediaResults } from '@capacitor/camera';
 import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonProgressBar, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
+import Photo from '../Photo';
 
 interface PrevState // State from the previous page
 {
-    photo: MediaResults | null, 
+    photo: Photo, 
     color: string, 
     style: string, 
+}
+
+// Matches the corresponding JSON in the inference server
+interface InferenceResponse
+{
+    image: string,
 }
 
 const GenerateDesignPage: React.FC = () => {
 
   const location = useLocation()
   const history = useHistory()
-  const prevState: PrevState = location.state as PrevState | undefined
-  const photo = prevState?.photo ?? null
-  const inferenceURL = "localhost:8080/inference"
+  const prevState: PrevState = location.state as PrevState
+  const inferenceURL = "http://localhost:8000/inference"
+
+  const [inferenceResponse, setInferenceResponse] = useState<InferenceResponse>();
 
   function constructPrompt(prevState: PrevState): string
   {
@@ -29,55 +37,61 @@ const GenerateDesignPage: React.FC = () => {
             )
   }
 
-  async function inference(prompt: string, photo: MediaResults)
+  async function inference(prompt: string, photo: Photo)
   {
-      // return await fetch(inferenceURL, {
-      //   method: "POST",
-      //   headers: {"Content-Type": "application/json"},
-      //   body: JSON.stringify({
-      //     // INSERT DATA HERE (REFERENCE THE TEST API CALL)
-      //   })
-      // })
+      return fetch(inferenceURL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            image_data: photo.data,
+            image_type: photo.type,
+            user_prompt: prompt 
+        })
+      })
+
+      // console.log("RESPONSE:" + response)
+
+      // setInferenceResponse(await response.json() as InferenceResponse)
+          
 
       // [DEBUG ONLY] Return a fake base64 string corresponding to a right arrow svg
       
-      return `
+      // setInferenceResponse(`
   
-      PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBT
-      VkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xz
-      IC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAy
-      NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRo
-      IGQ9Ik0xMCA3TDE1IDEyTDEwIDE3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41
-      IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3Zn
-      Pg==
+      // PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBT
+      // VkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xz
+      // IC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAy
+      // NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRo
+      // IGQ9Ik0xMCA3TDE1IDEyTDEwIDE3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41
+      // IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3Zn
+      // Pg==
 
-      `
+      // `)
   }
 
   useEffect (() => {
     
-    // // Null Check: 
+    // Generate Prompt
+    let prompt = constructPrompt(prevState)
 
-    if (!photo || !prevState ) {
-      console.error("ERROR - No data available");
-      return;
-    }
+    // Run inference
+    inference(prompt, prevState.photo).then((response:Response) => 
+    {
+      // Deserialize JSON response
+      response.json().then((inferenceResponse: InferenceResponse) => 
+      {
 
-    // Question - should this be an async function? 
-    // Algorithm:
+        // Navigate to results page
+        let inferencePhoto = new Photo(inferenceResponse!.image, "png") // Inference server always returns PNG
+        history.push( '/results', 
+        {
+          originalImage: prevState.photo, 
+          inferenceImage: inferencePhoto
+        })
+     })
+    }); 
 
-    // // 1) Create prompt string from prevstate
-     let prompt = constructPrompt(prevState)
-    
-    // // 2) Fetch result image via inference server (use fetch API)
-     const response = inference(prompt, photo) // TODO: Add null checks
-
-    // // 3) Navigate to results page (new page) and pass the base64 output string there
-
-     history.push( '/results', { image: response }); 
-
-    //TODO Create the results Page 
-  }, [prevState, photo, history])
+  }, [])
 
   return (
     <>
@@ -115,6 +129,8 @@ const GenerateDesignPage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        
 
         
       </IonContent>

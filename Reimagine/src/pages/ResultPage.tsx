@@ -3,12 +3,12 @@ import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, I
 import {  refreshOutline, optionsOutline, heartOutline, downloadOutline} from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
+import Photo from '../Photo';
 
 interface PrevState // State from the previous page
 {
-    photo: MediaResults | null, 
-    color: string, 
-    style: string, 
+    originalImage: Photo, 
+    inferenceImage: Photo 
 }
 
 const ResultPage: React.FC = () => {
@@ -16,6 +16,11 @@ const ResultPage: React.FC = () => {
   const location = useLocation()
   const history = useHistory()
   const prevState: PrevState = location.state as PrevState
+
+  function createDataURL(photo: Photo): string
+  {
+      return `data:image/${photo.type};base64,${photo.data}`;
+  }
 
   return (
     <>
@@ -28,10 +33,11 @@ const ResultPage: React.FC = () => {
           <IonButtons>
             <IonBackButton text="" defaultHref='/home'></IonBackButton>
           </IonButtons>
+
+          {/* TODO: Get this to be in the middle of the toolbar */}
           <IonTitle> Your AI Design </IonTitle>
 
           <IonButtons slot="end">
-
             <IonButton>
               <IonIcon icon={heartOutline}/>
             </IonButton> 
@@ -50,13 +56,13 @@ const ResultPage: React.FC = () => {
 
         <div style={{display: "flex", flexDirection: "row", gap: "10px",justifyContent: "center", marginTop: "20px"}}>
           <div>
-            <img src={ prevState?.photo?.webPath ?? "" } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px", backgroundColor: 'yellow'}} />
+            <img src={ createDataURL(prevState.originalImage) } style={{width:"160px", height:"220px",  objectFit:"cover", borderRadius:"8px", backgroundColor: 'yellow'}} />
             <p style={{textAlign:"center"}}>
               Original Room
             </p>
           </div>
           <div>
-            <img src={prevState?.generatedImage ?? ""} style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px", backgroundColor: 'blue'}} />
+            <img src={ createDataURL(prevState.inferenceImage) } style={{width:"160px", height:"220px", objectFit:"cover", borderRadius:"8px", backgroundColor: 'blue'}} />
             <p style={{textAlign:"center"}}>
               AI Designed Room
             </p>

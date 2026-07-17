@@ -3,10 +3,11 @@ import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, I
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import IdentifiableButton from '../components/IdentifiableButton';
+import Photo from '../Photo';
 
 interface PrevState // State from the previous page
 {
-    photo: MediaResults | null
+    photo: Photo // Base64 encoded
 }
 
 const DesignPreferencesPage: React.FC = () => {
@@ -18,7 +19,7 @@ const DesignPreferencesPage: React.FC = () => {
 
   // Contains the image passed from the UploadPhotoPage
   const prevState: PrevState = location.state as PrevState
-  const photo = prevState.photo
+  const photo = prevState.photo;
 
 
   // Design preferences states
@@ -57,10 +58,6 @@ const DesignPreferencesPage: React.FC = () => {
 
           <b> Choose style </b>
           <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'space-evenly'}}>
-              
-              {/* <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton> */}
 
               <IdentifiableButton fill="clear" id="victorian" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
@@ -85,25 +82,6 @@ const DesignPreferencesPage: React.FC = () => {
               <IdentifiableButton fill="clear" id="rococo" callback={(id)=>{setStyle(id)}}>
                 <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
               </IdentifiableButton>
-              
-              {/* <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
-              */
-
-
-             /*
-              <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
-            
-              <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton>
-
-              <IonButton fill="clear">
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IonButton> */}
               
           </div>
 
@@ -136,18 +114,6 @@ const DesignPreferencesPage: React.FC = () => {
               </IdentifiableButton>
             </div>
 
-          {/*
-          <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'start'}}>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'silver', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'white', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'lightgrey', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'darkgrey', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'gray', marginRight: '20px'}}/>
-            <div style={{height: '50px', width : '50px', borderRadius: '25px', borderStyle : 'solid', borderWidth: '1px', background : 'black', marginRight: '20px'}}/>
-          </div>
-
-          */} 
-
           <div style={{display : 'inline'}}>
                 <b> Additional Preferences </b>
                 <span>(optional)</span>
@@ -168,7 +134,6 @@ const DesignPreferencesPage: React.FC = () => {
             </IonItem>
           </IonList>
 
-          {/* <IonButton color="dark" expand='full' routerLink='/generating-design'> Generate Design </IonButton> */}
           <IonButton color="dark" expand='full' onClick={nextPage} disabled={style === "" || color === ""}> Generate Design </IonButton>
           
         </div>

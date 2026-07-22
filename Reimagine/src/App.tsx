@@ -50,8 +50,17 @@ import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
 import ResultPage from './pages/ResultPage';
+import LoginPage from './pages/LoginPage';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import TabBar from './components/TabBar';
 
 setupIonicReact();
+
+// Sanity check, not hard authentication (actual auth is done on the server side)
+function authenticationCallback()
+{
+    return localStorage.getItem("jwt") !== null // Do we have a JWT from the server
+}
 
 const App: React.FC = () => (
   <IonApp>
@@ -61,43 +70,64 @@ const App: React.FC = () => (
       <IonTabs>
 
         <IonRouterOutlet>
-          <Route exact path="/home">
+          {/* <Route exact path="/home">
             <HomeTab/>
-          </Route>
+          </Route> */}
+          <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                              authenticationCallback={() => { return localStorage.getItem("jwt") !== null }} 
+                              exact path="/home">
+            <HomeTab/>
+          </AuthenticatedRoute>
+
           <Route exact path="/history">
             <HistoryTab />
+            <TabBar/>
           </Route>
+
           <Route path="/favorites">
-            <FavoritesTab />
+            <FavoritesTab/>
+            <TabBar/>
           </Route>
+
           <Route path="/profile">
             <ProfileTab/>
+            <TabBar/>
           </Route>
+
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
+
+          <Route exact path="/upload">
+            <UploadPhotoPage/>
+            <TabBar/>
+          </Route>
+
+          <Route exact path="/design-preferences">
+            <DesignPreferencesPage/>
+            <TabBar/>
+          </Route>
+
+          <Route exact path="/generating-design">
+              <GenerateDesignPage/>
+              <TabBar/>
+          </Route>
+
+          <Route exact path="/results">
+              <ResultPage/>
+              <TabBar/>
+          </Route>
+
+          <Route exact path="/login">
+            <LoginPage/>
+          </Route>
+
         </IonRouterOutlet>
-
-        <Route exact path="/upload">
-          <UploadPhotoPage/>
-        </Route>
-
-        <Route exact path="/design-preferences">
-          <DesignPreferencesPage/>
-        </Route>
-
-        <Route exact path="/generating-design">
-            <GenerateDesignPage/>
-        </Route>
-
-        <Route exact path="/results">
-            <ResultPage/>
-        </Route>
 
         {/* New Route */}
 
         {/* Setup the Bottom navigation tabs */}
-        <IonTabBar slot="bottom">
+        {/* <IonTabBar slot="bottom">
 
           <IonTabButton tab="home" href="/home">
             <IonIcon aria-hidden="true" icon={triangle} />
@@ -118,7 +148,8 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
-        </IonTabBar>
+        </IonTabBar> */}
+
       </IonTabs>
     </IonReactRouter>
   </IonApp>

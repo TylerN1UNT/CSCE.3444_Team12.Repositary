@@ -49,11 +49,6 @@ const GenerateDesignPage: React.FC = () => {
         })
       })
 
-      // console.log("RESPONSE:" + response)
-
-      // setInferenceResponse(await response.json() as InferenceResponse)
-          
-
       // [DEBUG ONLY] Return a fake base64 string corresponding to a right arrow svg
       
       // setInferenceResponse(`
@@ -80,7 +75,6 @@ const GenerateDesignPage: React.FC = () => {
       // Deserialize JSON response
       response.json().then((inferenceResponse: InferenceResponse) => 
       {
-
         // Navigate to results page
         let inferencePhoto = new Photo(inferenceResponse!.image, "png") // Inference server always returns PNG
         history.push( '/results', 

@@ -65,10 +65,9 @@ function authenticationCallback()
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-
-      {/* Setup Pages routing */}
       <IonTabs>
 
+        {/* Define Routes */}
         <IonRouterOutlet>
 
           <Route exact path="/home">

@@ -74,24 +74,21 @@ const App: React.FC = () => (
             <HomeTab/>
           </Route> */}
           <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
-                              authenticationCallback={() => { return localStorage.getItem("jwt") !== null }} 
+                              authenticationCallback={authenticationCallback} 
                               exact path="/home">
             <HomeTab/>
           </AuthenticatedRoute>
 
           <Route exact path="/history">
             <HistoryTab />
-            <TabBar/>
           </Route>
 
           <Route path="/favorites">
             <FavoritesTab/>
-            <TabBar/>
           </Route>
 
           <Route path="/profile">
             <ProfileTab/>
-            <TabBar/>
           </Route>
 
           <Route exact path="/">
@@ -100,22 +97,20 @@ const App: React.FC = () => (
 
           <Route exact path="/upload">
             <UploadPhotoPage/>
-            <TabBar/>
           </Route>
 
           <Route exact path="/design-preferences">
             <DesignPreferencesPage/>
-            <TabBar/>
           </Route>
 
           <Route exact path="/generating-design">
               <GenerateDesignPage/>
-              <TabBar/>
+         
           </Route>
 
           <Route exact path="/results">
               <ResultPage/>
-              <TabBar/>
+        
           </Route>
 
           <Route exact path="/login">
@@ -127,7 +122,7 @@ const App: React.FC = () => (
         {/* New Route */}
 
         {/* Setup the Bottom navigation tabs */}
-        {/* <IonTabBar slot="bottom">
+        <IonTabBar slot="bottom">
 
           <IonTabButton tab="home" href="/home">
             <IonIcon aria-hidden="true" icon={triangle} />
@@ -148,7 +143,7 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
-        </IonTabBar> */}
+        </IonTabBar>
 
       </IonTabs>
     </IonReactRouter>

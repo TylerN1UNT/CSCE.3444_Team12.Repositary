@@ -10,20 +10,22 @@ interface AuthenticatedRouteProps extends React.ComponentProps<typeof Route>
 const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({authenticationCallback, unauthenticatedRedirectURL, children, ...passthroughProps} : AuthenticatedRouteProps) => 
 {
     
-    if(authenticationCallback())
-        {
-            // Render children inside route
-        <Route {...passthroughProps}>
-            {children}
-        </Route>
-    }
-    else
-    {
-        // const history = useHistory()
-        // history.push(unauthenticatedRedirectURL); // Redirect on unauthenticated
+    return  <Route {...passthroughProps}>
+                    {authenticationCallback() ? children : <Redirect to={unauthenticatedRedirectURL} />}
+            </Route>
+    // if(authenticationCallback())
+    // {
+    //         // Render children inside route
+    // }
+    // else
+    // {
+    //     // const history = useHistory()
+    //     // history.push(unauthenticatedRedirectURL); // Redirect on unauthenticated
 
-        return <Redirect to={unauthenticatedRedirectURL}/>
-    }
+    //     return  <Route>
+    //                 <Redirect to={unauthenticatedRedirectURL}/>
+    //             </Route>
+    // }
 }
 
 export default AuthenticatedRoute

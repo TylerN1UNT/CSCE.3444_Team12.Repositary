@@ -54,10 +54,10 @@ import LoginPage from './pages/LoginPage';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import TabBar from './components/TabBar';
 
-import profile from '../public/profile.svg'
-import heart from '../public/heart.svg'
-import clock from '../public/clock.svg'
-import home from '../public/home.svg'
+import profile from './images/profile.svg'
+import heart from './images/heart.svg'
+import clock from './images/clock.svg'
+import home from './images/home.svg'
 
 setupIonicReact();
 

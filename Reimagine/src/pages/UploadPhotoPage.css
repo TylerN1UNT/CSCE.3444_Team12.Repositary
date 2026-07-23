@@ -16,7 +16,7 @@
     flex-direction : column; 
     width : 95%;
     align-items : center;
-    background-color : lightgray;
+    background-color: rgb(235, 235, 235);
     border-style : dashed;
     border-width : 2px;
     border-color : gray;

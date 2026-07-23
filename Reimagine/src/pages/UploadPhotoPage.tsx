@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import { Capacitor } from '@capacitor/core';
 import { Filesystem } from '@capacitor/filesystem';
 import Photo from '../Photo';
-import picturePicture from '../../public/picture.svg'
+import picturePicture from '../images/picture.svg'
 
 const UploadPhotoPage: React.FC = () => {
   const [roomType, setRoomType] = useState('');

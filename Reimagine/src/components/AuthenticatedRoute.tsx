@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Redirect, Route, useHistory } from "react-router"
+import { Redirect } from "react-router"
 
 interface AuthenticatedRouteProps
 {

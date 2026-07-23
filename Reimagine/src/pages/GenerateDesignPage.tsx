@@ -102,8 +102,7 @@ const GenerateDesignPage: React.FC = () => {
             </div>
 
             <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-              <IonProgressBar value={.5} color="medium"/>
-              <span>50%</span>
+              <IonProgressBar type="indeterminate" color="medium"/>
             </div>
 
             <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke', color: 'black'}}>

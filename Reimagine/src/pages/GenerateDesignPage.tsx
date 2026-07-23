@@ -3,6 +3,8 @@ import { IonBackButton, IonButton, IonButtons, IonContent, IonGrid, IonHeader, I
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import Photo from '../Photo';
+import sparkles from '../images/sparkles.svg'
+import lightbulb from '../images/lightbulb.svg'
 
 interface PrevState // State from the previous page
 {
@@ -93,17 +95,19 @@ const GenerateDesignPage: React.FC = () => {
 
           <div style={{width: '95%', height: '100%', display: 'flex', flexDirection: 'column', alignItems : 'center', justifyContent: 'space-evenly'}}>
             
-            <img style={{width : '50px', height: '50px', backgroundColor: 'yellow', marginTop: '10px'}}/>
-            <b>AI is designing your perfect room...</b>
-            <p> This may take a few moments </p>
-            
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+              <img src={sparkles} style={{width : '50px', height: '50px', backgroundColor: 'white', marginTop: '10px'}}/>
+              <b>AI is designing your perfect room...</b>
+              <p> This may take a few moments </p>  
+            </div>
+
             <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
               <IonProgressBar value={.5} color="medium"/>
               <span>50%</span>
             </div>
 
             <div style={{display: 'flex', flexDirection: 'row', borderWidth: '1px', borderStyle: 'solid', boxShadow: '0px 0px 2px 0px lightgray', borderColor: 'lightgray', borderRadius: '8px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '20px', paddingRight: '20px', backgroundColor: 'whitesmoke', color: 'black'}}>
-              <img style={{width: '25px', height: '25px', backgroundColor: 'yellow', marginRight: '20px', marginLeft: '20px'}}/>
+              <img src={lightbulb} style={{width: '25px', height: '25px', marginRight: '20px'}}/>
               <b style={{marginRight: '5px'}}>Tip:</b>
               <span>More details you provide = better results!</span>
             </div>

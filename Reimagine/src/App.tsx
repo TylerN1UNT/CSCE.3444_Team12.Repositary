@@ -49,7 +49,7 @@ import './theme/variables.css';
 import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
-import ResultPage from './pages/ResultPage';
+import ResultPage from './pages/ResultPage'
 import LoginPage from './pages/LoginPage';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import TabBar from './components/TabBar';

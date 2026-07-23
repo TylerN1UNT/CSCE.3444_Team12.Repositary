@@ -50,6 +50,9 @@ import UploadPhotoPage from './pages/UploadPhotoPage';
 import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
 import ResultPage from './pages/ResultPage';
+import LoginPage from './pages/LoginPage';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import TabBar from './components/TabBar';
 
 import profile from '../public/profile.svg'
 import heart from '../public/heart.svg'
@@ -58,48 +61,87 @@ import home from '../public/home.svg'
 
 setupIonicReact();
 
+// Sanity check, not hard authentication (actual auth is done on the server side)
+function authenticationCallback()
+{
+    return localStorage.getItem("jwt") !== null // Do we have a JWT from the server
+}
+
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-
-      {/* Setup Pages routing */}
       <IonTabs>
 
+        {/* Define Routes */}
         <IonRouterOutlet>
+
           <Route exact path="/home">
-            <HomeTab/>
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <HomeTab/>
+            </AuthenticatedRoute>
           </Route>
+
           <Route exact path="/history">
-            <HistoryTab />
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback} >
+              <HistoryTab/>
+            </AuthenticatedRoute>
           </Route>
-          <Route path="/favorites">
-            <FavoritesTab />
+
+          <Route exact path="/favorites">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <FavoritesTab/>
+            </AuthenticatedRoute>
           </Route>
-          <Route path="/profile">
-            <ProfileTab/>
+
+          <Route exact path="/profile">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <ProfileTab/>
+            </AuthenticatedRoute>
           </Route>
+
+
+          <Route exact path="/upload">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <UploadPhotoPage/>
+            </AuthenticatedRoute>
+          </Route>
+
+
+          <Route exact path="/design-preferences">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <DesignPreferencesPage/>
+            </AuthenticatedRoute>
+          </Route>
+
+          <Route exact path="/generating-design">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <GenerateDesignPage/>
+            </AuthenticatedRoute>
+          </Route>
+
+          <Route exact path="/results">
+            <AuthenticatedRoute unauthenticatedRedirectURL="/login" 
+                                authenticationCallback={authenticationCallback}>
+              <ResultPage/>
+            </AuthenticatedRoute>
+          </Route>
+
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
+
+          <Route exact path="/login">
+            <LoginPage/>
+          </Route>
+
         </IonRouterOutlet>
-
-        <Route exact path="/upload">
-          <UploadPhotoPage/>
-        </Route>
-
-        <Route exact path="/design-preferences">
-          <DesignPreferencesPage/>
-        </Route>
-
-        <Route exact path="/generating-design">
-            <GenerateDesignPage/>
-        </Route>
-
-        <Route exact path="/results">
-            <ResultPage/>
-        </Route>
-
-        {/* New Route */}
 
         {/* Setup the Bottom navigation tabs */}
         <IonTabBar slot="bottom">
@@ -124,6 +166,7 @@ const App: React.FC = () => (
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
         </IonTabBar>
+
       </IonTabs>
     </IonReactRouter>
   </IonApp>

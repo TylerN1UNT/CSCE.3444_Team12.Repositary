@@ -61,7 +61,6 @@ const GenerateDesignPage: React.FC = () => {
       // Deserialize JSON response
       response.json().then((inferenceResponse: InferenceResponse) => 
       {
-
         // Navigate to results page
         let inferencePhoto = new Photo(inferenceResponse!.image, "png") // Inference server always returns PNG
         history.push( '/results', 

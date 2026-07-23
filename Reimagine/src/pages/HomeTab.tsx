@@ -43,9 +43,6 @@ const HomeTab: React.FC = () => {
               <IonButton color="light" routerLink='/upload'> Start Designing </IonButton>
             </div>
         </div>
-
-
-        
       </IonContent>
     </IonPage>
     

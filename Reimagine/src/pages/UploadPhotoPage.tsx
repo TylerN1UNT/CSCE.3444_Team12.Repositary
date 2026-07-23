@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { Capacitor } from '@capacitor/core';
 import { Filesystem } from '@capacitor/filesystem';
 import Photo from '../Photo';
+import picturePicture from '../../public/picture.svg'
 
 const UploadPhotoPage: React.FC = () => {
   const [roomType, setRoomType] = useState('');
@@ -74,7 +75,7 @@ const UploadPhotoPage: React.FC = () => {
     
                 <div id="image-upload-div">
                   
-                  <img style={{width: '50px', height: '50px', backgroundColor: 'yellow'}}/>
+                  <img src={picturePicture} style={{width: '50px', height: '50px'}}/>
                   <p>Upload a clear photo of your room</p>
                   <IonButton color="light" onClick={selectPhoto}> Choose Photo </IonButton>
                   
@@ -84,10 +85,10 @@ const UploadPhotoPage: React.FC = () => {
 
                   <div className="input-div">
                     <span>Room Type</span>
-                    <IonList>
+                    <IonList lines="full">
                       <IonItem>
                         <IonSelect 
-                          placeholder="Favorite Fruit" 
+                          placeholder="Select room type"
                           interface="action-sheet"
                           value={roomType}
                           onIonChange={e => setRoomType(e.detail.value)}
@@ -102,10 +103,10 @@ const UploadPhotoPage: React.FC = () => {
       
                   <div className="input-div">
                     <span>Design Style (Optional)</span>
-                    <IonList>
+                    <IonList lines="full">
                       <IonItem>
                         <IonSelect 
-                          placeholder="Favorite Fruit" 
+                          placeholder="Select style" 
                           interface="action-sheet"
                           value={designStyle}
                           onIonChange={e => setDesignStyle(e.detail.value)}

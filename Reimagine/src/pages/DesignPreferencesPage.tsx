@@ -4,6 +4,12 @@ import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import IdentifiableButton from '../components/IdentifiableButton';
 import Photo from '../Photo';
+import fluid from '../../public/fluid.svg'
+import castle from '../../public/castle.svg'
+import crown from '../../public/crown.svg'
+import pillar from '../../public/pillar.svg'
+import sword from '../../public/medieval-sword.svg'
+import modern from '../../public/modern-home.svg'
 
 interface PrevState // State from the previous page
 {
@@ -59,29 +65,47 @@ const DesignPreferencesPage: React.FC = () => {
           <b> Choose style </b>
           <div style={{display: 'flex', flexDirection : 'row', width : '100%', justifyContent : 'space-evenly'}}>
 
-              <IdentifiableButton fill="clear" id="victorian" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="victorian" callback={(id)=>{setStyle(id)}}>
+                  <img src={crown} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Victorian </span>
+              </div>
 
-              <IdentifiableButton fill="clear" id="modern" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="modern" callback={(id)=>{setStyle(id)}}>
+                  <img src={modern} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Modern </span>
+              </div>
 
-              <IdentifiableButton fill="clear" id="brutalist" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="brutalist" callback={(id)=>{setStyle(id)}}>
+                  <img src={sword} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Brutalist </span>
+              </div>
 
-              <IdentifiableButton fill="clear" id="baroque" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="baroque" callback={(id)=>{setStyle(id)}}>
+                  <img src={pillar} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Baroque </span>
+              </div>
 
-              <IdentifiableButton fill="clear" id="gothic" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="gothic" callback={(id)=>{setStyle(id)}}>
+                  <img src={castle} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Gothic </span>
+              </div>
 
-              <IdentifiableButton fill="clear" id="rococo" callback={(id)=>{setStyle(id)}}>
-                <img style={{height: '50px', width : '50px', background : 'yellow'}}/>
-              </IdentifiableButton>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <IdentifiableButton fill="clear" id="Rococo" callback={(id)=>{setStyle(id)}}>
+                  <img src={fluid} style={{height: '50px', width : '50px', background : 'lightgrey', borderWidth: '1px', borderStyle: "solid", borderColor: "silver", boxShadow: "0 0 4px 0 silver", padding: "5px"}}/>
+                </IdentifiableButton>
+                <span> Rococo </span>
+              </div>
               
           </div>
 
@@ -122,7 +146,7 @@ const DesignPreferencesPage: React.FC = () => {
           <IonList>
             <IonItem>
               <IonSelect 
-                placeholder="Favorite Fruit" 
+                placeholder="Furniture, materials, lighting..." 
                 interface="action-sheet"
                 value={additionalPreferences}
                 onIonChange={e => setAdditionalPreferences(e.detail.value)}

@@ -51,6 +51,11 @@ import DesignPreferencesPage from './pages/DesignPreferencesPage';
 import GenerateDesignPage from './pages/GenerateDesignPage';
 import ResultPage from './pages/ResultPage';
 
+import profile from '../public/profile.svg'
+import heart from '../public/heart.svg'
+import clock from '../public/clock.svg'
+import home from '../public/home.svg'
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -100,22 +105,22 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
 
           <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={triangle} />
+            <IonIcon aria-hidden="true" icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="favorites" href="/favorites">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+            <IonIcon aria-hidden="true" icon={heart} />
             <IonLabel>Favorites</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="history" href="/history">
-            <IonIcon aria-hidden="true" icon={square} />
+            <IonIcon aria-hidden="true" icon={clock} />
             <IonLabel>History</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="profile" href="/profile">
-            <IonIcon aria-hidden="true" icon={square} />
+            <IonIcon aria-hidden="true" icon={profile} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
         </IonTabBar>

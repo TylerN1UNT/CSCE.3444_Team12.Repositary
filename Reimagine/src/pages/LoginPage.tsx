@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonInputPasswordToggle, IonItem, IonList, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 
@@ -51,7 +51,9 @@ const LoginPage: React.FC = () => {
                 </IonItem>
 
                 <IonItem>
-                  <IonInput label="Password" labelPlacement="floating" inputMode="text" name="password" onIonChange={(event) => { setPassword(event.detail.value ?? "")}}></IonInput>
+                  <IonInput label="Password" labelPlacement="floating" inputMode="text" type="password" name="password" onIonChange={(event) => { setPassword(event.detail.value ?? "")}}>
+                    <IonInputPasswordToggle slot="end"/>
+                  </IonInput>
                 </IonItem>
 
               </IonList>

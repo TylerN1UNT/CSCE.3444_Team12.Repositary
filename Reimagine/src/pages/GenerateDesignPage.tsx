@@ -48,20 +48,6 @@ const GenerateDesignPage: React.FC = () => {
             user_prompt: prompt 
         })
       })
-
-      // [DEBUG ONLY] Return a fake base64 string corresponding to a right arrow svg
-      
-      // setInferenceResponse(`
-  
-      // PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBT
-      // VkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xz
-      // IC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAy
-      // NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRo
-      // IGQ9Ik0xMCA3TDE1IDEyTDEwIDE3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41
-      // IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3Zn
-      // Pg==
-
-      // `)
   }
 
   useEffect (() => {

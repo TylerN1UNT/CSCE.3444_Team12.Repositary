@@ -27,10 +27,9 @@ const HomeTab: React.FC = () => {
       <IonContent fullscreen>
 
         {/* Content */}
-        <div style={{display: 'flex' , flexDirection : 'column', alignItems: 'center', width: '100vw', height: '100vh'}}>
+        <div style={{display: 'flex' , flexDirection : 'column', alignItems: 'center', width: '100%', height: '100%', justifyContent: "center"}}>
 
-            <img src="/Reimagine.png" alt="Reimagine" style={{width : '314px', height: '314px', marginTop: '10px'}}/>
-
+            <img src="/Reimagine.png" alt="Reimagine" style={{width : '237px', height: '216px', marginTop: '10px'}}/>
 
             <div style={{display : 'flex', flexDirection : 'column', width : '30%'}}>
               
